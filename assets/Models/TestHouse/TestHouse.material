@@ -1,0 +1,85 @@
+material 1390956325_1_Roofing_Metal_Standing_Seam_Red
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.650980392156863 0.274509803921569 0.227450980392157
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 24.0, 24.0
+      texture_unit
+      {
+        texture 1390956325_1_Roofing_Metal_Standing_Seam_Red.jpg
+      }
+    }
+  }
+}
+material 1390956325_2_Roofing_Shingles_Variable
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.576470588235294 0.47843137254902 0.415686274509804
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 24.0, 18.0
+      texture_unit
+      {
+        texture 1390956325_2_Roofing_Shingles_Variable.jpg
+      }
+    }
+  }
+}
+material 1390956325_3_Stone_Flagstone_Ashlar
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.686274509803922 0.454901960784314 0.4
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 48.0, 48.0
+      texture_unit
+      {
+        texture 1390956325_3_Stone_Flagstone_Ashlar.jpg
+      }
+    }
+  }
+}
+material 1390956325_4_Roofing_Shingles_Asphalt
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.435294117647059 0.407843137254902 0.380392156862745
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 36.0, 36.0
+      texture_unit
+      {
+        texture 1390956325_4_Roofing_Shingles_Asphalt.jpg
+      }
+    }
+  }
+}
+material 1390956325_SketchupDefault
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 1.0 1.0 1.0
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}

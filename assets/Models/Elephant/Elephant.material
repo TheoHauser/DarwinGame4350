@@ -1,0 +1,62 @@
+material 1391042085_1_ElepEYE
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.00784313725490196 0.00784313725490196 0.0117647058823529
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1391042085_2_Ele_Tuskh
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.709803921568627 0.615686274509804 0.372549019607843
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 1.0, 1.0
+      texture_unit
+      {
+        texture 1391042085_2_ELETUSK.JPG
+      }
+    }
+  }
+}
+material 1391042085_3_ElphSkin
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.650980392156863 0.56078431372549 0.392156862745098
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 1.0, 1.0
+      texture_unit
+      {
+        texture 1391042085_1_ELPHSKIN.JPG
+      }
+    }
+  }
+}
+material 1391042085_SketchupDefault
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 1.0 1.0 1.0
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
