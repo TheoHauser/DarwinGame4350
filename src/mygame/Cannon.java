@@ -9,7 +9,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Cylinder;
-import com.jme3.scene.shape.Dome;
+import com.jme3.scene.shape.Sphere;
 import com.jme3.math.Vector3f;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
@@ -21,12 +21,11 @@ public class Cannon extends Node{
     
     
     public Cannon(SimpleApplication sa){
-        Dome base = new Dome(new Vector3f(0,0,0), 10, 10, 4, false);
+        Sphere base = new Sphere(20, 20, 4);
         Geometry bas = new Geometry("Base", base);
         
         Cylinder barrel = new Cylinder(20, 20, 1f, 10f, true);
         Geometry bar = new Geometry("Barrel", barrel);
-        
         
         Material mat = new Material(sa.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.Gray);

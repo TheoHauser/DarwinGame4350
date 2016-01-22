@@ -3,11 +3,19 @@ package mygame;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.FastMath;
 import com.jme3.scene.Node;
+import com.jme3.input.KeyInput;
+import com.jme3.input.MouseInput;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.AnalogListener;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
 
 public class Main extends SimpleApplication {
     public static final int NUMBER_OF_ANIMALS = 16;
     Node groundNode;
     Node[] animalNodes;
+    Cannon can;
+    CannonBall ball;
     float time;
     boolean switched = false;
     JMEInit jmeInit;
@@ -24,11 +32,12 @@ public class Main extends SimpleApplication {
     public void simpleInitApp() {
         // initialize graphics (cam, materials etc.)
         jmeInit = new JMEInit(this);
+        initCam();
+        initKeys();
         //
         // add ground
         groundNode = new Ground(this);
         rootNode.attachChild(groundNode);
-        initCam();
         //
         // add animals
         addAnimals();
@@ -43,8 +52,8 @@ public class Main extends SimpleApplication {
         for (int i = 0; i < NUMBER_OF_ANIMALS; i++) {
             animalNodes[i] = new Node();
             Animal animal;
-            if (i % 2 == 0) {
                 animal = new Dinosaur(this);
+            if (i % 2 == 0) {
             } else {
                 animal = new Elephant(this);
             }
@@ -58,12 +67,12 @@ public class Main extends SimpleApplication {
     }
     
     private void addCanon(){
-        Cannon can = new Cannon(this);
+        can = new Cannon(this);
         can.setLocalTranslation(0, 0, 0);
         rootNode.attachChild(can);
         
-        CannonBall ball = new CannonBall(this);
-        ball.setLocalTranslation(0,2,12);
+        ball = new CannonBall(this);
+        ball.setLocalTranslation(0,2,0);
         rootNode.attachChild(ball);
     }
     
@@ -80,4 +89,43 @@ public class Main extends SimpleApplication {
     private void initCam(){
         flyCam.setMoveSpeed(30);
     }
+    private void initKeys(){
+        inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_NUMPAD4));
+        inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_NUMPAD6));
+        inputManager.addMapping("up", new KeyTrigger(KeyInput.KEY_NUMPAD8));
+        inputManager.addMapping("down", new KeyTrigger(KeyInput.KEY_NUMPAD2));
+        inputManager.addMapping("Shoot", new KeyTrigger(KeyInput.KEY_SPACE));
+        
+        // Add the names to the action listener.
+        inputManager.addListener(actionListener,"Shoot");
+        inputManager.addListener(analogListener,"left", "right", "up", "down");
+    }
+    
+    private ActionListener actionListener = new ActionListener(){
+        public void onAction(String name, boolean keyPressed, float tpf){
+            if(name.equals("Shoot")){
+                CannonBall c = (CannonBall)ball.deepClone();
+                c.setLocalTranslation(0, 2, 0);
+                rootNode.attachChild(c);
+                
+            }
+        }
+    };
+    
+    private AnalogListener analogListener = new AnalogListener(){
+        public void onAnalog(String name, float value, float tpf){
+            if(name.equals("left")){
+                can.rotate(0, value*speed, 0);
+            }
+            if(name.equals("right")){
+                can.rotate(0, -value*speed, 0);
+            }
+            if(name.equals("up")){
+                can.rotate(-value*speed, 0, 0);
+            }
+            if(name.equals("down")){
+                can.rotate(value*speed, 0, 0);
+            }
+        }
+    };
 }
