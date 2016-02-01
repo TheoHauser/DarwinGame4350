@@ -18,8 +18,9 @@ public class Main extends SimpleApplication {
     Node[] animalNodes;
     Cannon can;
     CannonBall ball;
-    Node pivoty = new Node();
-    Node pivotx = new Node();
+    CannonBall[] b;
+    int numBalls = 0;
+    Vector3f[] bloc = new Vector3f[20];
     float time;
     boolean switched = false;
     JMEInit jmeInit;
@@ -74,15 +75,13 @@ public class Main extends SimpleApplication {
         can = new Cannon(this);
         can.setLocalTranslation(0, 0, 0);
 
-        rootNode.attachChild(pivoty);
-        rootNode.attachChild(pivotx);
-        
-        pivoty.attachChild(can);
-        pivotx.attachChild(can);
+        rootNode.attachChild(can);
         
         ball = new CannonBall(this);
         ball.setLocalTranslation(0,2,0);
         rootNode.attachChild(ball);
+        
+        b = new CannonBall[20];
     }
     
     
@@ -93,7 +92,30 @@ public class Main extends SimpleApplication {
             animalNodes[i].getChild(0).rotate(0, tpf / 2, 0);
             time += tpf;
         }
+        updateFlight(tpf);
     } 
+    
+    public void createCannonBall(){
+        b[numBalls] = (CannonBall)ball.deepClone();
+        rootNode.attachChild(b[numBalls]);
+        b[numBalls].setLocalRotation(can.getLocalRotation());
+        bloc[numBalls] = new Vector3f(0,0,1);
+        can.localToWorld(bloc[numBalls],bloc[numBalls]);
+        numBalls = (numBalls+1)%20;
+        System.out.println("numBalls = "+ numBalls);
+    }
+    
+    private void updateFlight(float tpf){
+        Vector3f pos;
+        for(int i = 0; i< numBalls; i++){
+            pos = b[i].getWorldTranslation();
+            if(pos.y<0f||Math.abs(pos.x)>=150)
+                rootNode.detachChild(b[i]);
+            b[i].move(bloc[i].mult(2));
+            b[i].move(0f,-4.9f*tpf,0f);
+        }
+        System.out.println("b[0] local translation:" + bloc[0]);
+    }
     
     private void initCam(){
         flyCam.setMoveSpeed(30);
@@ -112,14 +134,11 @@ public class Main extends SimpleApplication {
     
     private ActionListener actionListener = new ActionListener(){
         public void onAction(String name, boolean keyPressed, float tpf){
-            if(name.equals("Shoot")){
-                CannonBall c = (CannonBall)ball.deepClone();
-                c.setLocalTranslation(0, 2, 0);
-                rootNode.attachChild(c);
+            if(name.equals("Shoot") && keyPressed){
+                createCannonBall();
             }
         }
     };
-    
     
     private AnalogListener analogListener = new AnalogListener(){
         public void onAnalog(String name, float value, float tpf){
