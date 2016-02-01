@@ -2,6 +2,8 @@ package mygame;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.FastMath;
+import com.jme3.math.Vector3f;
+import com.jme3.math.Quaternion;
 import com.jme3.scene.Node;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
@@ -16,6 +18,8 @@ public class Main extends SimpleApplication {
     Node[] animalNodes;
     Cannon can;
     CannonBall ball;
+    Node pivoty = new Node();
+    Node pivotx = new Node();
     float time;
     boolean switched = false;
     JMEInit jmeInit;
@@ -69,7 +73,12 @@ public class Main extends SimpleApplication {
     private void addCanon(){
         can = new Cannon(this);
         can.setLocalTranslation(0, 0, 0);
-        rootNode.attachChild(can);
+
+        rootNode.attachChild(pivoty);
+        rootNode.attachChild(pivotx);
+        
+        pivoty.attachChild(can);
+        pivotx.attachChild(can);
         
         ball = new CannonBall(this);
         ball.setLocalTranslation(0,2,0);
@@ -107,24 +116,28 @@ public class Main extends SimpleApplication {
                 CannonBall c = (CannonBall)ball.deepClone();
                 c.setLocalTranslation(0, 2, 0);
                 rootNode.attachChild(c);
-                
             }
         }
     };
     
+    
     private AnalogListener analogListener = new AnalogListener(){
         public void onAnalog(String name, float value, float tpf){
+            Quaternion quaternion = new Quaternion();
             if(name.equals("left")){
-                can.rotate(0, value*speed, 0);
+                Vector3f yAxis = can.worldToLocal(Vector3f.UNIT_Y, null);
+                can.rotate(quaternion.fromAngleAxis(FastMath.PI/60, yAxis));
             }
             if(name.equals("right")){
-                can.rotate(0, -value*speed, 0);
+                Vector3f yAxis = can.worldToLocal(Vector3f.UNIT_Y, null);
+                can.rotate(quaternion.fromAngleAxis(-FastMath.PI/60, yAxis));
             }
             if(name.equals("up")){
-                can.rotate(-value*speed, 0, 0);
+                can.rotate(-1*tpf,0, 0);
+
             }
             if(name.equals("down")){
-                can.rotate(value*speed, 0, 0);
+                can.rotate(1*tpf,0, 0);
             }
         }
     };
