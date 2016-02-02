@@ -120,11 +120,21 @@ public class Main extends SimpleApplication {
                     //animalNodes[j].detachChild(animal);
                     System.out.println("animal name:" + animal.getClass());
                     if(animal instanceof Dinosaur){
+                        animalNodes[j].detachAllChildren();
                         animal = new Elephant(this);
+                        float angle = (float) j / NUMBER_OF_ANIMALS * 2 * FastMath.PI;
+                        float radius = 30f;
+                        animal.setLocalTranslation(radius * FastMath.sin(angle), 0, radius * FastMath.cos(angle));
+                        animal.rotate(0, angle, 0);
                         animalNodes[j].attachChild(animal);
                     }
-                    if(animal instanceof Elephant){
+                    else if(animal instanceof Elephant){
+                        animalNodes[j].detachAllChildren();
                         animal = new Dinosaur(this);
+                        float angle = (float) j / NUMBER_OF_ANIMALS * 2 * FastMath.PI;
+                        float radius = 30f;
+                        animal.setLocalTranslation(radius * FastMath.sin(angle), 0, radius * FastMath.cos(angle));
+                        animal.rotate(0, angle, 0);
                         animalNodes[j].attachChild(animal);
                     }
                 }
