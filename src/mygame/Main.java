@@ -145,12 +145,13 @@ public class Main extends SimpleApplication {
     
     private void initCam(){
         flyCam.setMoveSpeed(30);
+        flyCam.setRotationSpeed(0);
     }
     private void initKeys(){
-        inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_NUMPAD4));
-        inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_NUMPAD6));
-        inputManager.addMapping("up", new KeyTrigger(KeyInput.KEY_NUMPAD8));
-        inputManager.addMapping("down", new KeyTrigger(KeyInput.KEY_NUMPAD2));
+        inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_LEFT));
+        inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_RIGHT));
+        inputManager.addMapping("up", new KeyTrigger(KeyInput.KEY_UP));
+        inputManager.addMapping("down", new KeyTrigger(KeyInput.KEY_DOWN));
         inputManager.addMapping("Shoot", new KeyTrigger(KeyInput.KEY_SPACE));
         
         // Add the names to the action listener.
