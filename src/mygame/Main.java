@@ -113,6 +113,22 @@ public class Main extends SimpleApplication {
                 rootNode.detachChild(b[i]);
             b[i].move(bloc[i].mult(2));
             b[i].move(0f,-4.9f*tpf,0f);
+            for(int j = 0; j < animalNodes.length; j++){
+                Animal animal = (Animal)animalNodes[j].getChild(0);
+                Vector3f center = animal.getCenter();
+                if(center.distance(pos)<=2){
+                    //animalNodes[j].detachChild(animal);
+                    System.out.println("animal name:" + animal.getClass());
+                    if(animal instanceof Dinosaur){
+                        animal = new Elephant(this);
+                        animalNodes[j].attachChild(animal);
+                    }
+                    if(animal instanceof Elephant){
+                        animal = new Dinosaur(this);
+                        animalNodes[j].attachChild(animal);
+                    }
+                }
+            }
         }
         System.out.println("b[0] local translation:" + bloc[0]);
     }
