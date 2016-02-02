@@ -18,12 +18,14 @@ import com.jme3.math.ColorRGBA;
  * @author Theo
  */
 public class Cannon extends Node{
-    
+    float yRotation = 0;
+    float xRotation = 0;
     
     public Cannon(SimpleApplication sa){
-        Sphere base = new Sphere(20, 20, 4);
-        Geometry bas = new Geometry("Base", base);
-        
+        Sphere sbase = new Sphere(20, 20, 4);
+        Geometry base = new Geometry("Base", sbase);
+        base.setLocalTranslation(0,0,0);
+
         Cylinder barrel = new Cylinder(20, 20, 1f, 10f, true);
         Geometry bar = new Geometry("Barrel", barrel);
         
@@ -33,14 +35,14 @@ public class Cannon extends Node{
         Material mat1 = new Material(sa.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
         mat1.setColor("Color", ColorRGBA.DarkGray);
         
-        bar.setLocalTranslation(0, 2, 6);
+        bar.setLocalTranslation(0, 2, 5);
         //mat.setColor("Diffuse", ColorRGBA.LightGray);
         //mat.setFloat("Shininess", 15f);
         
-        bas.setMaterial(mat);
+        base.setMaterial(mat);
         bar.setMaterial(mat1);
         
-        this.attachChild(bas);
+        sa.getRootNode().attachChild(base);
         this.attachChild(bar);
         
     }
