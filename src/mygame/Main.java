@@ -116,7 +116,7 @@ public class Main extends SimpleApplication {
             for(int j = 0; j < animalNodes.length; j++){
                 Animal animal = (Animal)animalNodes[j].getChild(0);
                 Vector3f center = animal.getCenter();
-                if(center.distance(pos)<=2){
+                if(center.distance(pos)<=4){
                     //animalNodes[j].detachChild(animal);
                     System.out.println("animal name:" + animal.getClass());
                     if(animal instanceof Dinosaur){
@@ -171,11 +171,11 @@ public class Main extends SimpleApplication {
             Quaternion quaternion = new Quaternion();
             if(name.equals("left")){
                 Vector3f yAxis = can.worldToLocal(Vector3f.UNIT_Y, null);
-                can.rotate(quaternion.fromAngleAxis(FastMath.PI/60, yAxis));
+                can.rotate(quaternion.fromAngleAxis(FastMath.PI/90, yAxis));
             }
             if(name.equals("right")){
                 Vector3f yAxis = can.worldToLocal(Vector3f.UNIT_Y, null);
-                can.rotate(quaternion.fromAngleAxis(-FastMath.PI/60, yAxis));
+                can.rotate(quaternion.fromAngleAxis(-FastMath.PI/90, yAxis));
             }
             if(name.equals("up")){
                 can.rotate(-1*tpf,0, 0);
